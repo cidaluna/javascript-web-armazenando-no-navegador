@@ -14,6 +14,14 @@ form.addEventListener('submit', (evento) => {
 });
 
 function criaElemento(nome, quantidade){
-    console.log(nome);
-    console.log(quantidade);
+    // console.log(nome);
+    // console.log(quantidade);
+
+    const novoItem = document.createElement('li');
+    novoItem.classList.add('item');
+    console.log(novoItem);
+
+    const numeroItem = document.createElement('strong');
+    numeroItem.innerHTML = quantidade;
+    console.log(numeroItem);
 }

@@ -1,5 +1,9 @@
 const form = document.getElementById('novoItem');
 const lista = document.getElementById('lista');
+// verifica se ja existe itens no localStorage, se nao existir, criar um array vazio
+const itens = localStorage.getItem('itens') || []; 
+
+console.log(itens);
 
 form.addEventListener('submit', (evento) => {
     evento.preventDefault(); // interromper o evento padrao
@@ -49,7 +53,18 @@ function criaElemento(nome, quantidade){
         'quantidade': quantidade
     }
 
-    localStorage.setItem("nome", itemAtual);
+    // insere o item cadastrado no array
+    itens.push(itemAtual); 
+
+    // transformar o objeto em uma string(pq só entende string) e passa o array itens por parametro
+    localStorage.setItem('itens', JSON.stringify(itens)); 
    
+    // métodos próprios do localStorage para manipulação de dados:
+    // localStorage.clear(), localStorage.setItem(), localStorage.removeItem(), 
+    // localStorage.getItem(), localStorage.length(), localStorage.key().
+
+    // Os tipos de dados armazenados no localStorage não devem ser considerados sensíveis,
+    // de acordo com a LGPD (Lei Geral de Proteção de Dados). 
+    // Dados considerados sensíveis, devem ser armazenados em Cookies.
 
 }

@@ -1,4 +1,5 @@
 const form = document.getElementById('novoItem');
+const lista = document.getElementById('lista');
 
 form.addEventListener('submit', (evento) => {
     evento.preventDefault(); // interromper o evento padrao
@@ -20,14 +21,17 @@ function criaElemento(nome, quantidade){
     // <li class="item"><strong>7</strong>Camisas</li>
     const novoItem = document.createElement('li');
     novoItem.classList.add('item');
-     console.log(novoItem);
+    // console.log(novoItem);
 
     const numeroItem = document.createElement('strong');
     numeroItem.innerHTML = quantidade;
-     console.log(numeroItem);
+    // console.log(numeroItem);
 
     novoItem.appendChild(numeroItem); // define a hierarquia que a tag strong estará dentro da tag <li>
     novoItem.innerHTML += nome;
+
+    //console.log(novoItem);
+    lista.appendChild(novoItem);
 
     console.log(novoItem);
 

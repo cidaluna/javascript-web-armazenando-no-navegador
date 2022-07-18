@@ -1,7 +1,8 @@
 const form = document.getElementById('novoItem');
 const lista = document.getElementById('lista');
 // verifica se ja existe itens no localStorage, se nao existir, criar um array vazio
-const itens = localStorage.getItem('itens') || []; 
+// porem, para pegar os itens é preciso transformar de volta a string em objeto javascript por meio do JSON.parse
+const itens = JSON.parse(localStorage.getItem('itens')) || []; 
 
 console.log(itens);
 

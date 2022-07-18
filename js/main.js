@@ -7,7 +7,7 @@ const itens = JSON.parse(localStorage.getItem('itens')) || [];
 // pagina é carregada buscando os elementos do localStorage e iterando e criando cada um dos elementos
 itens.forEach((elemento) => {
     criaElemento(elemento);
-})
+});
 
 form.addEventListener('submit', (evento) => {
     evento.preventDefault(); // interromper o evento padrao
@@ -36,17 +36,17 @@ form.addEventListener('submit', (evento) => {
 
 });
 
-function criaElemento(nome, quantidade){
+function criaElemento(item){
 
     // <li class="item"><strong>7</strong>Camisas</li>
     const novoItem = document.createElement('li');
     novoItem.classList.add('item');
 
     const numeroItem = document.createElement('strong');
-    numeroItem.innerHTML = quantidade;
+    numeroItem.innerHTML = item.quantidade;
 
     novoItem.appendChild(numeroItem); // define a hierarquia que a tag strong estará dentro da tag <li>
-    novoItem.innerHTML += nome;
+    novoItem.innerHTML += item.nome;
 
     lista.appendChild(novoItem);
 
@@ -61,4 +61,8 @@ function criaElemento(nome, quantidade){
     Os tipos de dados armazenados no localStorage não devem ser considerados sensíveis,
     de acordo com a LGPD (Lei Geral de Proteção de Dados). 
     Dados considerados sensíveis, devem ser armazenados em Cookies.
+
+    LocalStorage armazena dados de forma persistente, apenas aqueles considerados não sensíveis. 
+    Cookies possuem menor espaço de armazenamento 4KB, e salvam dados considerados sensíveis de forma persistente.
+    Já SessionStorage não salva de forma persistente, armazenando dados apenas enquanto o site estiver aberto.
 */

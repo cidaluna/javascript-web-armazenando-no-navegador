@@ -42,6 +42,14 @@ function criaElemento(nome, quantidade){
     //console.log(novoItem);
     lista.appendChild(novoItem);
 
-    console.log(novoItem);
+    // para salvar multiplos itens no localStorage
+    // vamos enviar um Objeto (itemAtual), caso contrario, ele ira sobrescrever cada item enviado
+    const itemAtual = {
+        'nome': nome,
+        'quantidade': quantidade
+    }
+
+    localStorage.setItem("nome", itemAtual);
+   
 
 }

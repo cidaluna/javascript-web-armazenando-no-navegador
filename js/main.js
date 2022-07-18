@@ -17,11 +17,18 @@ function criaElemento(nome, quantidade){
     // console.log(nome);
     // console.log(quantidade);
 
+    // <li class="item"><strong>7</strong>Camisas</li>
     const novoItem = document.createElement('li');
     novoItem.classList.add('item');
-    console.log(novoItem);
+     console.log(novoItem);
 
     const numeroItem = document.createElement('strong');
     numeroItem.innerHTML = quantidade;
-    console.log(numeroItem);
+     console.log(numeroItem);
+
+    novoItem.appendChild(numeroItem); // define a hierarquia que a tag strong estará dentro da tag <li>
+    novoItem.innerHTML += nome;
+
+    console.log(novoItem);
+
 }

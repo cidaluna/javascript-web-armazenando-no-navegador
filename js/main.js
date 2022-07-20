@@ -14,6 +14,9 @@ form.addEventListener('submit', (evento) => {
     const nome = evento.target.elements['nome'];
     const quantidade = evento.target.elements['coxinha'];
 
+    // verificar se o elemento ja existe, entao soma a quantidade apenas
+    const existe = itens.find(elemento => elemento.nome === nome.value);
+
     // para salvar multiplos itens no localStorage
     // vamos enviar um Objeto (itemAtual), caso contrario, ele ira sobrescrever cada item enviado
     const itemAtual = {
@@ -21,11 +24,23 @@ form.addEventListener('submit', (evento) => {
         'quantidade': quantidade.value
     }
 
-    // chama funcao que cria o elemento enviando os valores por parametro
-    criaElemento(itemAtual);
+    if(existe){
+        itemAtual.id = existe.id;
 
-    // insere o item cadastrado no array
-    itens.push(itemAtual); 
+        atualizaElemento(itemAtual);
+
+        itens[existe.id] = itemAtual;
+    }else{
+        // cria o id com o valor do tamanho da lista itens
+        itemAtual.id = itens.length;
+
+        // chama funcao que cria o elemento enviando os valores por parametro
+        criaElemento(itemAtual);
+
+        // insere o item cadastrado no array
+        itens.push(itemAtual); 
+
+    }
 
     // transformar o objeto em uma string(pq só entende string) e passa o array itens por parametro
     localStorage.setItem('itens', JSON.stringify(itens));  
@@ -44,12 +59,20 @@ function criaElemento(item){
 
     const numeroItem = document.createElement('strong');
     numeroItem.innerHTML = item.quantidade;
-
-    novoItem.appendChild(numeroItem); // define a hierarquia que a tag strong estará dentro da tag <li>
+    numeroItem.dataset.id = item.id;
     novoItem.innerHTML += item.nome;
-
+    novoItem.appendChild(numeroItem); // define a hierarquia que a tag strong estará dentro da tag <li>
     lista.appendChild(novoItem);
+}
 
+function atualizaElemento(item){
+    document.querySelector('[data-id='+item.id+']').innerHTML = item.quantidade;
+}
+
+function botaoDeleta(){
+    const elementoBotao = document.createElement('button');
+    elementoBotao.innerHTML = X;
+    return elementoBotao;
 }
 
 /* Anotações
